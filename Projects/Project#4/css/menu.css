@@ -1,0 +1,134 @@
+.menu-wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.menu-wrap .toggler {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  opacity: 0;
+  z-index: 2;
+}
+.menu-wrap .humbugger {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60px;
+  height: 60px;
+  background: rgba(77, 114, 126, 0.75);
+  padding: 1rem;
+}
+
+/* Humbugger Lines*/
+
+.menu-wrap .humbugger > div {
+  position: relative;
+  display: flex;
+  flex: none;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 2px;
+  background: #fff;
+  transition: all 0.5s ease;
+}
+
+.menu-wrap .humbugger > div::before,
+.menu-wrap .humbugger > div::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  background: #fff;
+  width: 100%;
+  height: 2px;
+  top: -10px;
+}
+.menu-wrap .humbugger > div::after {
+  top: 10px;
+}
+
+/* Toggler Animation */
+.menu-wrap .toggler:checked + .humbugger > div {
+  transform: rotate(135deg);
+}
+/* Turns into X */
+.menu-wrap .toggler:checked + .humbugger > div::before,
+.menu-wrap .toggler:checked + .humbugger > div::after {
+  top: 0px;
+  transform: rotate(90deg);
+}
+
+/* rotate on hover when it's checked */
+.menu-wrap .toggler:checked:hover + .humbugger > div {
+  transform: rotate(225deg);
+}
+
+/* Menu part  */
+.menu-wrap .menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  visibility: hidden;
+}
+
+.menu-wrap .menu > div {
+  background: var(--overlay-color);
+  height: 200vh;
+  width: 200vw;
+  display: flex;
+  flex: none;
+  justify-content: center;
+  align-items: center;
+  transform: scale(0);
+  border-radius: 50%;
+}
+.menu-wrap .menu > div > div {
+  max-width: 90vw;
+  max-height: 100vh;
+  transition: all 0.4 ease-in-out;
+  opacity: 0;
+}
+.menu-wrap .menu > div > div > ul > li {
+  list-style: none;
+  text-align: center;
+  font-size: 1.5rem;
+  padding: 1rem;
+}
+.menu-wrap .menu > div > div > ul > li > a {
+  text-decoration: none;
+  color: #fff;
+  transition: all 0.3s ease-in-out;
+}
+.menu-wrap .menu > div > div > ul > li > a:hover {
+  color: var(--secondary-color);
+}
+
+/* Show menu  */
+.menu-wrap .toggler:checked ~ .menu {
+  visibility: visible;
+}
+.menu-wrap .toggler:checked ~ .menu > div {
+  transform: scale(1);
+  transition-duration: var(--menu-speed);
+}
+
+.menu-wrap .toggler:checked ~ .menu > div > div {
+  opacity: 1;
+  transition: all 0.4s ease-in 0.4s;
+}
